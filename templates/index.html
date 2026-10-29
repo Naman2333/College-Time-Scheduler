@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Time Scheduler</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <header>
+        <div>
+            <h1>College Time Scheduler</h1>
+            <p>Smart timetable generation using DAA</p>
+        </div>
+    </header>
+
+    <main>
+        <section class="welcome">
+            <h2>Manage Your College Timetable</h2>
+            <p>Add your subjects and generate a weekly schedule automatically.</p>
+        </section>
+
+        <section class="panel">
+            <h2>Add a Subject</h2>
+
+            <form id="subjectForm">
+                <div class="form-grid">
+                    <div>
+                        <label for="subject">Subject Name</label>
+                        <input id="subject" name="subject"
+                               placeholder="e.g. Data Structures" required>
+                    </div>
+
+                    <div>
+                        <label for="teacher">Teacher Name</label>
+                        <input id="teacher" name="teacher"
+                               placeholder="e.g. Mr. Sharma" required>
+                    </div>
+
+                    <div>
+                        <label for="student_group">Student Group</label>
+                        <input id="student_group" name="student_group"
+                               placeholder="e.g. BCA-2A" required>
+                    </div>
+
+                    <div>
+                        <label for="classroom">Classroom</label>
+                        <input id="classroom" name="classroom"
+                               placeholder="e.g. Lab 1" required>
+                    </div>
+
+                    <div>
+                        <label for="sessions">Sessions per Week</label>
+                        <input id="sessions" name="sessions"
+                               type="number" min="1" max="40"
+                               value="3" required>
+                    </div>
+                </div>
+
+                <button type="submit">Add Subject</button>
+            </form>
+
+            <p id="status" role="status"></p>
+        </section>
+
+        <section class="panel">
+            <div class="section-heading">
+                <div>
+                    <h2>Subject List</h2>
+                    <p>All subjects added to the system.</p>
+                </div>
+                <button class="secondary" onclick="loadSubjects()">
+                    Refresh
+                </button>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Teacher</th>
+                            <th>Group</th>
+                            <th>Room</th>
+                            <th>Sessions</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="subjectList"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="panel">
+            <div class="section-heading">
+                <div>
+                    <h2>Weekly Timetable</h2>
+                    <p>Your automatically generated schedule.</p>
+                </div>
+                <div class="actions">
+                    <button onclick="generateSchedule()">
+                        Generate Timetable
+                    </button>
+                    <button class="danger" onclick="resetSchedule()">
+                        Clear Timetable
+                    </button>
+                </div>
+            </div>
+
+            <div id="timetableStatus" role="status"></div>
+
+            <div class="table-wrapper">
+                <table id="timetable">
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>09–10</th>
+                            <th>10–11</th>
+                            <th>11–12</th>
+                            <th>12–01</th>
+                            <th>01–02</th>
+                            <th>02–03</th>
+                            <th>03–04</th>
+                            <th>04–05</th>
+                        </tr>
+                    </thead>
+                    <tbody id="timetableBody"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>College Time Scheduler | DAA Mini Project</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
